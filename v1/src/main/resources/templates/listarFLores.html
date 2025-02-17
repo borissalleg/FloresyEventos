@@ -24,6 +24,7 @@
                             <th>Nombre de Arreglo</th>
                             <th>Color</th>
                             <th>Precio</th>
+                            <th>Foto</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -33,6 +34,15 @@
                             <td th:text="${flor.nombreArreglo}"></td>
                             <td th:text="${flor.color}"></td>
                             <td th:text="${flor.precio}"></td>
+                            <td>
+                                <!-- <p th:text="${flor.rutaFoto}"></p> Esto imprimirá la ruta de la imagen -->
+                                <img th:src="@{/images/{filename}(filename=${flor.rutaFoto})}" alt="Foto del arreglo" width="100">
+                            </td>
+                            <td>
+                               
+                               
+                            </td>
+                            
                             <td>
                                 <!-- Botón Actualizar -->
                                 <a th:href="@{/flores/editar/{id}(id=${flor.id})}" class="btn btn-sm btn-warning">

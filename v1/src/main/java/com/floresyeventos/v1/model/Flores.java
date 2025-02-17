@@ -23,6 +23,8 @@ public class Flores {
 
     String color;
     float precio;
-
+    
+    @Column(name = "ruta_foto", length = 255) // Almacena la ruta de la imagen
+    private String rutaFoto; // Campo para almacenar la ruta de la imagen
     
 }

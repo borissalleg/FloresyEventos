@@ -10,19 +10,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-// import com.floresyeventos.v1.Service.UserService;
-// import com.floresyeventos.v1.Service.;
+import com.floresyeventos.v1.Service.UserService;
+import com.floresyeventos.v1.Service.UserServiceImpl;
 
 @Configuration
 public class SecurityConfig {
 
-    // private final UserServiceImpl userService;
+    private final UserServiceImpl userService;
 
-    // public SecurityConfig(UserServiceImpl userService) {
-    //     this.userService = userService;
-    // }
+    public SecurityConfig(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
+@Bean
+public UserDetailsService userDetailsService() {
+    return userService;
+}
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -51,21 +56,21 @@ public class SecurityConfig {
                 .invalidateHttpSession(true)                     // Invalida la sesión
                 .deleteCookies("JSESSIONID")                     // Borra cookies de sesión
                 .permitAll()
-            );
-            // .userDetailsService(userService); // Configuración para autenticar desde la base de datos
+            )
+           .userDetailsService(userService); // Configuración para autenticar desde la base de datos
     
         return http.build();
     }
 
-    // @Bean
-    // public PasswordEncoder passwordEncoder() {
-    //     return new BCryptPasswordEncoder();
-    // }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-    // @Bean
-    // public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-    //     return authConfig.getAuthenticationManager();
-    // }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
 
 
 }

@@ -31,4 +31,26 @@ public class FlorService  {
        return FlorRepository.save(flores);
     }
 
+    public void eliminarFlor(Long id) {
+        FlorRepository.deleteById(id);
+    }
+    public Flores modificarFlor(Long id, Flores floresActualizadas) {
+        Optional<Flores> florOptional = FlorRepository.findById(id);
+        
+        if (florOptional.isPresent()) {
+            Flores florExistente = florOptional.get();
+            
+            // Actualizar los campos necesarios
+            florExistente.setNombreArreglo(floresActualizadas.getNombreArreglo());
+            florExistente.setColor(floresActualizadas.getColor());
+            florExistente.setPrecio(floresActualizadas.getPrecio());
+            // Puedes agregar más campos según tu modelo
+            
+            // Guardar la flor actualizada
+            return FlorRepository.save(florExistente);
+        } else {
+            // Manejar el caso en que la flor no exista
+            throw new RuntimeException("Flor no encontrada con ID: " + id);
+        }
+    }
 }

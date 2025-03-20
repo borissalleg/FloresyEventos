@@ -19,7 +19,7 @@ public class OpenApiConfig {
      *
      * @return un objeto OpenAPI configurado con la información de la API.
      */
-    @Bean
+   @Bean 
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info() // Crea una nueva instancia de Info para describir la API

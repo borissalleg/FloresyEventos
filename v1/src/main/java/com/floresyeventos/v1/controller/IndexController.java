@@ -27,7 +27,7 @@ public class IndexController {
      *
      * @param model Modelo de Thymeleaf.
      * @param authentication Información de autenticación actual del usuario.
-     * @return Vista correspondiente.
+     * @return Vista correspondiente a cada metodo .
      */
     @GetMapping("/index")
     public String home(Model model) {
